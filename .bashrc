@@ -19,12 +19,29 @@ export PATH="$HOME/.tmuxifier/bin:$PATH"
 export EDITOR=nvim
 
 function update-dotfiles() {
-  cp ~/.bashrc ~/dotfiles/.bashrc
-  cp ~/.tmux.conf ~/dotfiles/.tmux.conf
-  rsync -a --delete ~/.config/ ~/dotfiles/.config/
-  rsync -a --delete ~/.tmux/ ~/dotfiles/.tmux/
+  DOTFILES_DIR=~/dotfiles
 
-  echo "Backup completed. (Update git manually)"
+  # Copias
+  cp ~/.bashrc $DOTFILES_DIR/.bashrc
+  cp ~/.tmux.conf $DOTFILES_DIR/.tmux.conf
+  rsync -a --delete ~/.config/ $DOTFILES_DIR/.config/
+  rsync -a --delete ~/.tmux/ $DOTFILES_DIR/.tmux/
+
+  # Git
+  cd "$DOTFILES_DIR" || {
+    echo "No se pudo acceder a $DOTFILES_DIR"
+    return 1
+  }
+
+  if ! git diff --quiet || ! git diff --cached --quiet; then
+    git add .
+    git commit -m "Update dotfiles"
+    git push
+    cd ~
+    echo "Update completed and pushed to remote."
+  else
+    echo "No hay cambios para hacer commit."
+  fi
 }
 
 #
