@@ -26,6 +26,7 @@ function update-dotfiles() {
   cp ~/.tmux.conf $DOTFILES_DIR/.tmux.conf
   rsync -a --delete ~/.config/ $DOTFILES_DIR/.config/
   rsync -a --delete ~/.tmux/ $DOTFILES_DIR/.tmux/
+  rsync -a --delete ~/.tmuxifier/ $DOTFILES_DIR/.tmuxifier/
 
   # Git
   cd "$DOTFILES_DIR" || {
