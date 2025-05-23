@@ -79,21 +79,7 @@ function update-dotfiles() {
   rsync -a --delete ~/.config/ $DOTFILES_DIR/.config/
   rsync -a --delete ~/.tmux/ $DOTFILES_DIR/.tmux/
 
-  # Git
-  cd "$DOTFILES_DIR" || {
-    echo "Couldn't access $DOTFILES_DIR"
-    return 1
-  }
-
-  if ! git diff --quiet || ! git diff --cached --quiet; then
-    git add .
-    git commit -m "Update dotfiles"
-    git push
-    cd ~
-    echo "Update completed and pushed to remote."
-  else
-    echo "No changes found"
-  fi
+  echo "Updated - Git push must be done manually"
 }
 
 #
