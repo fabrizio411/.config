@@ -11,7 +11,7 @@ alias ls='ls --color=auto'
 alias rc='nvim ~/.bashrc'
 alias ls='lsd --oneline'
 alias grep='grep --color=auto'
-alias fvim='nvim $(fz --preview="cat {}")'
+alias fvim='nvim $(fzf --preview="cat {}")'
 PS1='[\u@\h \W]\$ '
 
 export EDITOR=nvim
