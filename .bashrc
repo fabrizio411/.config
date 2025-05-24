@@ -54,8 +54,10 @@ ntmux() {
     tmux has-session -t "$session_name" 2>/dev/null
     if [ $? != 0 ]; then
       TMUX_PWD="$workdir" tmux new-session -d -s "$session_name" -c "$workdir" "nvim"
+      tmux rename-window -t "$session_name:1" "editor"
       tmux new-window -t "$session_name" -c "$workdir"
       tmux split-window -h -t "$session_name:" -c "$workdir"
+      tmux rename-window -t "$session_name:2" "server"
     fi
 
     if [ -n "$TMUX" ]; then

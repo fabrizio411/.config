@@ -1,5 +1,3 @@
-local trigger_text = ";"
-
 return {
   "saghen/blink.cmp",
   enabled = true,
