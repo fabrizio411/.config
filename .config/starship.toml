@@ -1,3 +1,4 @@
+# Starship configuration
 
 format = """
 [  ](bg:color_bg1)\

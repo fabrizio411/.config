@@ -5,9 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ch='cd ~'
 alias cl='clear'
-alias ls='ls --color=auto'
 alias rc='nvim ~/.bashrc'
 alias ls='lsd --oneline'
 alias grep='grep --color=auto'
@@ -22,6 +20,12 @@ export EDITOR=nvim
 NTMUX_PROJECTS=("pinerolo" "milkcream" "easyfing" "portfolio")
 
 ntmux() {
+  # Si no se pasa ningún parámetro, ejecutar con "basic"
+  if [ -z "$1" ]; then
+    ntmux basic
+    return
+  fi
+
   if [ "$1" = "dev" ]; then
     # Verificar que se haya pasado un segundo parámetro
     if [ -z "$2" ]; then
@@ -56,7 +60,6 @@ ntmux() {
       TMUX_PWD="$workdir" tmux new-session -d -s "$session_name" -c "$workdir" "nvim"
       tmux rename-window -t "$session_name:1" "editor"
       tmux new-window -t "$session_name" -c "$workdir"
-      tmux split-window -h -t "$session_name:" -c "$workdir"
       tmux rename-window -t "$session_name:2" "server"
     fi
 
@@ -78,9 +81,7 @@ ntmux() {
 }
 
 _ntmux_autocomplete() {
-  local cur prev
-  cur="${COMP_WORDS[COMP_CWORD]}"
-  prev="${COMP_WORDS[COMP_CWORD * 1]}"
+  local cur="${COMP_WORDS[COMP_CWORD]}"
 
   if [[ ${COMP_WORDS[1]} == "dev" && $COMP_CWORD -eq 2 ]]; then
     COMPREPLY=($(compgen -W "${NTMUX_PROJECTS[*]}" -- "$cur"))
@@ -135,8 +136,7 @@ ktmux() {
 
 _ktmux_autocomplete() {
   local cur="${COMP_WORDS[COMP_CWORD]}"
-  local sessions
-  sessions=$(tmux ls 2>/dev/null | cut -d: -f1)
+  local sessions=$(tmux ls 2>/dev/null | cut -d: -f1)
   COMPREPLY=($(compgen -W "$sessions" -- "$cur"))
 }
 
