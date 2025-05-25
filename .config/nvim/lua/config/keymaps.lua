@@ -26,3 +26,4 @@ vim.api.nvim_set_keymap("v", "B", "^", { noremap = true, silent = true })
 -- Panes creation
 vim.api.nvim_set_keymap("n", "<leader>=", ":vsplit<CR>", { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>P', ':q<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>d', ':Alpha<CR>', { noremap = true, silent = true })

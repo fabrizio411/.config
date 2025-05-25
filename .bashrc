@@ -158,19 +158,6 @@ update-dotfiles() {
 }
 
 #
-# Check alias disponibility
-#
-check() {
-  local name="$1"
-  if type "$name" &>/dev/null; then
-    echo "* El nombre '$name' ya está en uso:"
-    type "$name"
-  else
-    echo "+ El nombre '$name' está disponible"
-  fi
-}
-
-#
 # Starship startup
 #
 eval "$(starship init bash)"
