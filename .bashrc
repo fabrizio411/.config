@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+source "$HOME/.config/fzf.sh"
+
 alias cl='clear'
 alias rc='nvim ~/.bashrc'
 alias sr='source ~/.bashrc'
@@ -14,6 +16,12 @@ alias todo='bat ~/notes/todo.md'
 PS1='[\u@\h \W]\$ '
 
 export EDITOR=nvim
+
+fv() {
+  local file
+  file=$(fzf --tmux bottom,50,18 --style full) || return
+  [ -n "$file" ] && nvim "$file"
+}
 
 #
 # tmux* Nueva session
