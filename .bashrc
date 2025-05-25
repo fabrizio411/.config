@@ -15,12 +15,6 @@ PS1='[\u@\h \W]\$ '
 
 export EDITOR=nvim
 
-nvimf() {
-  local file
-  file=$(fzf --tmux center) || return
-  [ -n "$file" ] && nvim "$file"
-}
-
 #
 # tmux* Nueva session
 #
