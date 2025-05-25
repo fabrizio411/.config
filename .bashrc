@@ -7,12 +7,19 @@
 
 alias cl='clear'
 alias rc='nvim ~/.bashrc'
+alias sr='source ~/.bashrc'
 alias ls='lsd --oneline'
 alias grep='grep --color=auto'
-alias fvim='nvim $(fzf --preview="cat {}")'
+alias todo='bat ~/notes/todo.md'
 PS1='[\u@\h \W]\$ '
 
 export EDITOR=nvim
+
+nvimf() {
+  local file
+  file=$(fzf --tmux center) || return
+  [ -n "$file" ] && nvim "$file"
+}
 
 #
 # tmux* Nueva session
@@ -21,15 +28,16 @@ NTMUX_PROJECTS=("pinerolo" "milkcream" "easyfing" "portfolio")
 
 ntmux() {
   # Si no se pasa ningún parámetro, ejecutar con "basic"
-  if [ -z "$1" ]; then
-    ntmux basic
+  if [ $# -eq 0 ]; then
+    ntmux home
     return
   fi
 
-  if [ "$1" = "dev" ]; then
+  # Modo desarrollo con flag -d
+  if [ "$1" = "-d" ]; then
     # Verificar que se haya pasado un segundo parámetro
     if [ -z "$2" ]; then
-      echo "* Error: A project name must be specified."
+      echo "* Error: A project name must be specified after -d."
       return 1
     fi
 
@@ -68,22 +76,25 @@ ntmux() {
     else
       tmux attach-session -t "$session_name"
     fi
-  else
-    local session_name="$1"
-    tmux has-session -t "$session_name" 2>/dev/null || tmux new-session -d -s "$session_name"
 
-    if [ -n "$TMUX" ]; then
-      tmux switch-client -t "$session_name"
-    else
-      tmux attach-session -t "$session_name"
-    fi
+    return
+  fi
+
+  # Resto de sesiones
+  local session_name="$1"
+  tmux has-session -t "$session_name" 2>/dev/null || tmux new-session -d -s "$session_name"
+
+  if [ -n "$TMUX" ]; then
+    tmux switch-client -t "$session_name"
+  else
+    tmux attach-session -t "$session_name"
   fi
 }
 
 _ntmux_autocomplete() {
   local cur="${COMP_WORDS[COMP_CWORD]}"
 
-  if [[ ${COMP_WORDS[1]} == "dev" && $COMP_CWORD -eq 2 ]]; then
+  if [[ ${COMP_WORDS[1]} == "-d" && $COMP_CWORD -eq 2 ]]; then
     COMPREPLY=($(compgen -W "${NTMUX_PROJECTS[*]}" -- "$cur"))
   fi
 }
