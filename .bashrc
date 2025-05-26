@@ -28,7 +28,7 @@ note() {
   local file
 
   file=$(fd . "$dir" --type f --exclude .git --absolute-path | sed "s|^$dir/||" | fzf --tmux bottom,50,18 --style full) || return
-  [ -n "$file" ] && vim "$dir/$file"
+  [ -n "$file" ] && nvim "$dir/$file"
 }
 
 #
