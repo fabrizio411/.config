@@ -23,6 +23,14 @@ fv() {
   [ -n "$file" ] && nvim "$file"
 }
 
+note() {
+  local dir="${1:-/home/fabz/notes}"
+  local file
+
+  file=$(fd . "$dir" --type f --exclude .git --absolute-path | sed "s|^$dir/||" | fzf --tmux bottom,50,18 --style full) || return
+  [ -n "$file" ] && vim "$dir/$file"
+}
+
 #
 # tmux* Nueva session
 #

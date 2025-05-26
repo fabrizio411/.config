@@ -30,7 +30,7 @@ vim.api.nvim_set_keymap("v", "B", "^", { noremap = true, silent = true })
 
 -- Panes creation
 vim.api.nvim_set_keymap("n", "<leader>=", ":vsplit<CR>", { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>p', ':q<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>P', ':q<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>d', ':Alpha<CR>', { noremap = true, silent = true })
 
 -- Page scroll center cursor
@@ -38,8 +38,8 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Cursor center on search
-vim.keymap.set("n", "n", "nzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
 
 -- Replace curretn word
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
