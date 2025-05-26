@@ -5,8 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-source "$HOME/.config/fzf.sh"
-
 alias cl='clear'
 alias rc='nvim ~/.bashrc'
 alias sr='source ~/.bashrc'
@@ -19,7 +17,13 @@ export EDITOR=nvim
 
 fv() {
   local file
-  file=$(fzf --tmux bottom,50,18 --style full) || return
+
+  if [ "$1" = "-a" ]; then
+    file=$(fzf --tmux bottom,50,18 --style full) || return
+  else
+    file=$(fd --type f --exclude .git --exclude public --exclude node_modules --exclude .tmux --exclude .ssh --exclude .npm --exclude .cache --exclude dotfiles | fzf --tmux bottom,50,18 --style full) || return
+  fi
+
   [ -n "$file" ] && nvim "$file"
 }
 
@@ -182,3 +186,8 @@ update-dotfiles() {
 # Starship startup
 #
 eval "$(starship init bash)"
+
+#
+# fzf startup
+#
+eval "$(fzf --bash)"
