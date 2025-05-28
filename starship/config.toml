@@ -1,4 +1,4 @@
-# Starship configuration
+# === STARSHIP CONFIG === #
 
 format = """
 [  ](bg:color_bg1)\

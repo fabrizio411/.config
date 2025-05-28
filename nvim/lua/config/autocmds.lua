@@ -15,5 +15,6 @@ vim.api.nvim_create_autocmd("FileType", {
     if Snacks and Snacks.toggle then
       Snacks.toggle.diagnostics():set(false)
     end
+    vim.b.autoformat = false
   end,
 })
