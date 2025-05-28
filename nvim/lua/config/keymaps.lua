@@ -43,3 +43,6 @@ vim.keymap.set("n", "N", "Nzz")
 
 -- Replace curretn word
 vim.keymap.set("n", "<leader>r", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- Restart LSP server
+vim.keymap.set("n", "<leader>cL", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
