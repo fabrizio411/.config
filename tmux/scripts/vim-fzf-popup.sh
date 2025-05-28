@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-set -e
-
 local file
 local -a exclude_dirs
 local exclude_args=""
@@ -20,6 +18,10 @@ for dir in $exclude_dirs; do
   exclude_args+=" --exclude $dir"
 done
 
-file=$(eval "fd --type f $exclude_args" | fzf) || return
+local current_pane_id=$(tmux display -p '#{pane_id}')
 
-[ -n "$file" ] && nvim "$file""$TMUX_PATH/scripts/vim-fzf-popup.sh"
+file=$(eval "fd --type f $exclude_args" | fzf --tmux bottom,50,18 --style full) || exit 0
+
+if [ -n "$file" ]; then
+  tmux send-keys -t "$current_pane_id" "nvim \"$file\"" C-m
+fi

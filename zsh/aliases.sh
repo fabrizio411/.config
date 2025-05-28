@@ -1,10 +1,11 @@
 # === GENERAL === #
 alias cl='clear'
 alias src='source ~/.zshrc'
+alias rc='nvim ~/.config/zsh'
 alias grep='grep --color=auto'
 
 # === FILE SYSTEM === #
-alias ff='fzf --preview "bat --style=numbers --color=always {}"'
+alias ff='fzf --preview "bat --paging=always --style=numbers --color=always {}"'
 alias ls='lsd --oneline'
 alias lsa='ls -a'
 
