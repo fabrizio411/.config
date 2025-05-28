@@ -17,7 +17,7 @@ alias ....='cd ../../..'
 # === TOOLS === #
 alias vim='nvim'
 alias lzg='lazygit'
-#alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
+alias cd='z'
 
 # === GIT === #
 alias gs='git status'
