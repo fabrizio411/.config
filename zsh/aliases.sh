@@ -24,3 +24,7 @@ alias gs='git status'
 alias ga='git add .'
 alias gc='git commit -m'
 alias gp='git push'
+
+# === TODOs === #
+alias todo='tmux popup -E -w 65 -h 25 -x C -y C -T " TODOs " -- \
+  zsh -c "bat --style=numbers,grid --paging=always ~/notes/todo.md"'
