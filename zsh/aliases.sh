@@ -23,6 +23,7 @@ alias cd='z'
 alias gs='git status'
 alias ga='git add .'
 alias gc='git commit -m'
+alias gcu='git commit -m "Update"'
 alias gp='git push'
 
 # === TODOs === #
