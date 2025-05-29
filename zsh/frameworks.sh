@@ -80,6 +80,12 @@ _create_razor_project() {
 _create_astro_project() {
   echo
   echo "Creating Astro project..."
+
+  pnpm create astro@latest "$2" --template with-tailwindcss --install
+  cd "$2" || return
+  pnpm add -D prettier prettier-plugin-astro
+
+  echo "Created Astro project -> $2"
 }
 
 _list_frameworks() {
