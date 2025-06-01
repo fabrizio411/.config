@@ -3,10 +3,10 @@
 # === CREAR/ABRIR SESSION === #
 NTMUX_PROJECTS=("pinerolo" "milkcream" "easyfing" "portfolio")
 
-ntmux() {
+nt() {
   # Si no se pasa ningún parámetro, ejecutar con "basic"
   if [ $# -eq 0 ]; then
-    ntmux home
+    nt home
     return
   fi
 
@@ -68,7 +68,7 @@ ntmux() {
   fi
 }
 
-_ntmux_autocomplete() {
+_nt_autocomplete() {
   local state
 
   _arguments \
@@ -81,10 +81,10 @@ _ntmux_autocomplete() {
       ;;
   esac
 }
-compdef _ntmux_autocomplete ntmux
+compdef _nt_autocomplete nt
 
 # === ELIMINAR SESSION === #
-ktmux() {
+kt() {
   local target="$1"
 
   # Verifica que la sesión exista
@@ -118,10 +118,10 @@ ktmux() {
   tmux kill-session -t "$target"
 }
 
-_ktmux_autocomplete() {
+_kt_autocomplete() {
   local -a sessions
   sessions=("${(@f)$(tmux ls 2>/dev/null | cut -d: -f1)}")
   _describe -t sessions 'TMUX sessions' sessions
 }
-compdef _ktmux_autocomplete ktmux
+compdef _kt_autocomplete kt
 
