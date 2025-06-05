@@ -1,7 +1,7 @@
 # === TMUX SESSION FUCNTIONS === #
 
 # === CREAR/ABRIR SESSION === #
-NTMUX_PROJECTS=("pinerolo" "milkcream" "easyfing" "portfolio")
+NTMUX_PROJECTS=("pinerolo" "milkcream" "easyfing" "portfolio" "gestion")
 
 nt() {
   # Si no se pasa ningún parámetro, ejecutar con "basic"

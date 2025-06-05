@@ -1,6 +1,7 @@
-alias co='g++ -o app'
-
-coe() {
+com() {
   g++ -o app "$1"
-  ./app
+
+  if [ "$2" = "-e" ]; then
+    ./app
+  fi
 }

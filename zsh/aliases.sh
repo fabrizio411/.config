@@ -6,8 +6,8 @@ alias grep='grep --color=auto'
 
 # === FILE SYSTEM === #
 alias ff='fzf --preview "bat --paging=always --style=numbers --color=always {}"'
-alias ls='lsd --oneline'
-alias lsa='ls -a'
+alias ls='lsd --oneline --group-dirs=first'
+alias lsa='ls -a --group-dirs=first'
 
 # === DIRECTORIES === #
 alias ..='cd ..'
@@ -18,6 +18,7 @@ alias ....='cd ../../..'
 alias vim='nvim'
 alias lzg='lazygit'
 alias cd='z'
+alias pgstart='sudo systemctl start postgresql'
 
 # === GIT === #
 alias gs='git status'
